@@ -3,31 +3,33 @@ package com.practice;
 public class PivotIndex {
 
 	public static void main(String[] args) {
-		int a0[] = {1, 7, 3, 6, 5, 6};
-        int len = a0.length;
-        int index = 1, leftsum=0, rightsum=0;
+		PivotIndex pivotIndex = new PivotIndex();
+		int[] nums = {1,2,3};
+		int result = pivotIndex.pivotIndex(nums);
+		System.out.println("Result: "+result);
+	}
+	
+	public int pivotIndex(int[] nums) {
+        int len = nums.length;
+        int index = 0, leftsum, rightsum;
         boolean pivotIndexExists = false;
-        while(index <= len) {
+        while(index < len) {
         	leftsum = 0; rightsum = 0;
         	for(int i=index+1; i<len; i++){
-                rightsum += a0[i];
+                rightsum += nums[i];
             }
             for(int i=index-1; i>=0; i--){
-                leftsum += a0[i];
+                leftsum += nums[i];
             }
             System.out.println("rightsum:"+rightsum);
             System.out.println("leftsum:"+leftsum);
-            if(leftsum != 0 && rightsum == leftsum) {
+            if(rightsum == leftsum) {
             	pivotIndexExists = true;
             	break;
             }
             index++;
         }
-        if(pivotIndexExists) {
-        	System.out.println(index);
-        }else {
-        	System.out.println(-1);
-        }
-	}
+        return pivotIndexExists ? index : -1;
+    }
 	
 }
