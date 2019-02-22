@@ -49,8 +49,8 @@ public class PlusOne {
 		     count++;
 		 }
 		 int output[] = new int[count];
-		 if(count!=0){
-			   n = sumOfDigits;
+		 if(count!=0){ // #3 not needed
+			   n = sumOfDigits;// copy not needed, the actual variable can be modified this time
 			   while (!n.equals(new BigInteger("0"))){
 			       output[count-1] = n.mod(new BigInteger("10")).intValue();
 			       n = n.divide(new BigInteger("10"));
