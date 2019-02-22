@@ -36,10 +36,10 @@ public class PlusOne {
 	 public int[] plusOne(int[] digits) {
 		 String str = "";
 		 for(int i=0; i<digits.length; i++) {
-			 str += String.valueOf(digits[i]);
+			 str += String.valueOf(digits[i]); // #1
 		 }
 		 BigInteger sum = new BigInteger(str);
-		 BigInteger one = new BigInteger("1");
+		 BigInteger one = new BigInteger("1"); // #2
 		 BigInteger sumOfDigits = sum.add(one);
 		 System.out.println(sumOfDigits.toString());
 		 int count = 0;
@@ -52,7 +52,7 @@ public class PlusOne {
 		 if(count!=0){
 			   n = sumOfDigits;
 			   while (!n.equals(new BigInteger("0"))){
-			       output[count-1] = n.mod(new BigInteger("10")).intValue();
+			       output[count-1] = n.mod(new BigInteger("10")).intValue(); // #3
 			       n = n.divide(new BigInteger("10"));
 			       count--;
 			   }
