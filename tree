@@ -1,0 +1,115 @@
+package practisePrograms;
+
+public class BinaryTree {
+	
+	public class Node {
+		int key;
+		String value;
+		Node leftChild;
+		Node rightChild;
+		
+		Node(int key, String value){
+			this.key = key;
+			this.value = value;
+		}
+		
+		public String toString() {
+			return value + " has a key " + key;
+		}
+	}
+	
+	Node root;
+	
+	public void addNodeToTree(int key, String value) {
+		Node newNode = new Node(key, value);
+		
+		if(root == null) {
+			root = newNode;
+		}else {
+			Node focusNode = root;
+			Node parent;
+			
+			while(true) {
+				parent = focusNode;
+				if(key < focusNode.key) {
+					focusNode = focusNode.leftChild;
+					if(focusNode == null) {
+						parent.leftChild = newNode;
+						return;
+					}
+				}else {
+					focusNode = focusNode.rightChild;
+					if(focusNode == null) {
+						parent.rightChild = newNode;
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public void inOrderTraversal(Node focusNode) {
+		if(focusNode != null) {
+			inOrderTraversal(focusNode.leftChild);
+			System.out.println(focusNode);
+			inOrderTraversal(focusNode.rightChild);
+		}
+	}
+	
+	public void preOrderTraversal(Node focusNode) {
+		if(focusNode != null) {
+			System.out.println(focusNode);
+			inOrderTraversal(focusNode.leftChild);
+			inOrderTraversal(focusNode.rightChild);
+		}
+	}
+	
+	public void postOrderTraversal(Node focusNode) {
+		if(focusNode != null) {
+			postOrderTraversal(focusNode.leftChild);
+			postOrderTraversal(focusNode.rightChild);
+			System.out.println(focusNode);
+		}
+	}
+	
+	public Node findNode(int key) {
+		Node focusNode = root;
+		
+		while(focusNode.key != key) {
+			if(key < focusNode.key) {
+				focusNode = focusNode.leftChild;
+			}else {
+				focusNode = focusNode.rightChild;
+			}
+			if(focusNode == null) {
+				return null;
+			}
+		}
+		return focusNode;
+	}
+
+	public static void main(String[] args) {
+		BinaryTree bt = new BinaryTree();
+		bt.addNodeToTree(27, "popo");
+		bt.addNodeToTree(34, "bappaiya");
+		bt.addNodeToTree(32, "bhabhi");
+		bt.addNodeToTree(62, "mumma");
+		bt.addNodeToTree(1, "chotla");
+		bt.addNodeToTree(87, "naniji");
+		System.out.println("In-Order Traversal:");
+		System.out.println("--------------------");
+		bt.inOrderTraversal(bt.root);
+		System.out.println();
+		System.out.println("Pre-Order Traversal:");
+		System.out.println("---------------------");
+		bt.preOrderTraversal(bt.root);
+		System.out.println();
+		System.out.println("Post-Order Traversal:");
+		System.out.println("---------------------");
+		bt.postOrderTraversal(bt.root);
+		System.out.println();
+		System.out.println("Search for 62: " + bt.findNode(62));
+	}
+
+}
+
